@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Lab5_Tarquinio.Models;
+using MvcMovie_Tarquinio.Models;
 
-namespace MvcMovie_Tarquinio
+namespace Lab5_Tarquinio
 {
     public class Startup
     {
@@ -22,20 +25,23 @@ namespace MvcMovie_Tarquinio
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<MvcMovie_TarquinioContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("MvcMovie_TarquinioContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseBrowserLink();
+            //if (env.IsDevelopment())
+            //{
+                //app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+            //}
+            //else
+            //{
+                //app.UseExceptionHandler("/Home/Error");
+            //}
 
             app.UseStaticFiles();
 
@@ -43,7 +49,7 @@ namespace MvcMovie_Tarquinio
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Movies}/{action=Index}/{id?}");
             });
         }
     }
