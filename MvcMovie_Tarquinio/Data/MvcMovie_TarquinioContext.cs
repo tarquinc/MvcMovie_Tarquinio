@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
+using MvcMovie_Tarquinio.Models;
 
 namespace MvcMovie_Tarquinio.Models
 {
@@ -15,5 +16,7 @@ namespace MvcMovie_Tarquinio.Models
         }
 
         public DbSet<MvcMovie.Models.Movie> Movie { get; set; }
+
+        public DbSet<MvcMovie_Tarquinio.Models.Reviews> Reviews { get; set; }
     }
 }

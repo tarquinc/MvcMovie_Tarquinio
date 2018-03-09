@@ -11,9 +11,10 @@ using System;
 namespace MvcMovie_Tarquinio.Migrations
 {
     [DbContext(typeof(MvcMovie_TarquinioContext))]
-    partial class MvcMovie_TarquinioContextModelSnapshot : ModelSnapshot
+    [Migration("20180309004214_Reviews")]
+    partial class Reviews
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,8 +53,6 @@ namespace MvcMovie_Tarquinio.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("MReviewID");
-
                     b.Property<int>("MovieID");
 
                     b.Property<string>("MovieReview")
@@ -66,23 +65,7 @@ namespace MvcMovie_Tarquinio.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("MReviewID");
-
-                    b.HasIndex("MovieID");
-
                     b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("MvcMovie_Tarquinio.Models.Reviews", b =>
-                {
-                    b.HasOne("MvcMovie_Tarquinio.Models.Reviews", "MReview")
-                        .WithMany("review")
-                        .HasForeignKey("MReviewID");
-
-                    b.HasOne("MvcMovie.Models.Movie", "movie")
-                        .WithMany()
-                        .HasForeignKey("MovieID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -11,9 +11,10 @@ using System;
 namespace MvcMovie_Tarquinio.Migrations
 {
     [DbContext(typeof(MvcMovie_TarquinioContext))]
-    partial class MvcMovie_TarquinioContextModelSnapshot : ModelSnapshot
+    [Migration("20180309014446_ReviewId")]
+    partial class ReviewId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
