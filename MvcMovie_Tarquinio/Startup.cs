@@ -49,7 +49,7 @@ namespace Lab5_Tarquinio
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Movies}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
