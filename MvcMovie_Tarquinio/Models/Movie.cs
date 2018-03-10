@@ -20,7 +20,7 @@ namespace MvcMovie.Models
         public DateTime? ReleaseDate { get; set; }
 
         [Range(0, 30, ErrorMessage = "Please enter a valid price below $29.99.")]
-        [RegularExpression("([0-9].+)", ErrorMessage = "You can only enter numbers in the 'Price' field.")]
+        //[RegularExpression("([0-9].+)", ErrorMessage = "You can only enter numbers in the 'Price' field.")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter a price.")]
         [DataType(DataType.Currency)]
         public decimal? Price { get; set; }
@@ -30,7 +30,8 @@ namespace MvcMovie.Models
         [StringLength(30)]
         public string Genre { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Please select a rating.")]
+        //[RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s-]*$", ErrorMessage = "Please select a rating.")]
+        [StringLength(5, ErrorMessage = "Please enter a valid movie rating.")]
         [Required]
         public string Rating { get; set; }
 

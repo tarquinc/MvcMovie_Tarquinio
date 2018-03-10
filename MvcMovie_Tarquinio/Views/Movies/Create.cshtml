@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label asp-for="Rating" class="control-label"></label>
                 <select asp-for="Rating" class="form-control">
-                    <option default-value="Select">Select...</option>
+                    <option default-value="">Select...</option>
                     <option>G</option>
                     <option>PG</option>
                     <option>PG-13</option>
@@ -55,4 +55,8 @@
 <div>
     <a asp-action="Index" class="btn btn-sm btn-default">Back to List</a>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

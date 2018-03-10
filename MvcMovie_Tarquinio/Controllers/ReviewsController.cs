@@ -21,34 +21,73 @@ namespace MvcMovie_Tarquinio.Controllers
         }
 
         // GET: Reviews
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Reviews.ToListAsync());
-        }
-
-        //public ActionResult Index(string sortOrder)
+        //public async Task<IActionResult> Index()
         //{
-        //    ViewBag.ReviewerSortParm = String.IsNullOrEmpty(sortOrder) ? "reviewer_desc" : "";
-        //    ViewBag.MovieSortParm = sortOrder == "Movie" ? "movie_desc" : "Movie";
-        //    var reviews = from s in db.Reviews
-        //                   select s;
-        //    switch (sortOrder)
-        //    {
-        //        case "movie_desc":
-        //            reviews = reviews.OrderByDescending(s => s.MovieID);
-        //            break;
-        //        case "Movie":
-        //            reviews = reviews.OrderBy(s => s.ID);
-        //            break;
-        //        case "reviewer_desc":
-        //            reviews = reviews.OrderByDescending(s => s.Name);
-        //            break;
-        //        default:
-        //            reviews = reviews.OrderBy(s => s.LastName);
-        //            break;
-        //    }
-        //    return View(reviews.ToList());
+        //    return View(await _context.Reviews.ToListAsync());
         //}
+
+        public async Task<IActionResult> Index(string sortOrder)
+        {
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["MovieSortParm"] = sortOrder == "Movie" ? "movie_desc" : "Movie";
+            //ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            //ViewData["MovieSortParm"] = String.IsNullOrEmpty(sortOrder) ? "movie_desc" : "";
+            var reviews = from s in _context.Reviews
+                           select s;
+
+            var movies = from m in _context.Movie
+                         select m;
+
+            foreach (var item in movies)
+            {
+                foreach (var r in reviews)
+                {
+                    if (item.ID == r.MovieID)
+                    {
+                        ViewData["mTitle"] = item.Title;
+                        ViewData["mID"] = r.MovieID;
+                    }
+                }
+            }
+
+
+
+            switch (sortOrder)
+            {
+                case "Name":
+                    reviews = reviews.OrderBy(s => s.Name);
+                    break;
+                case "name_desc":
+                    reviews = reviews.OrderByDescending(s => s.Name);
+                    break;
+                case "Movie":
+                    reviews = reviews.OrderBy(s => s.MovieID);
+                    break;
+                case "movie_desc":
+                    reviews = reviews.OrderByDescending(s => s.MovieID);
+                    break;
+                //default:
+                //    reviews = reviews.OrderBy(s => s.Name);
+                //    break;
+            }
+
+            var movieGenreVM = new MovieGenreViewModel();
+            movieGenreVM.genres = new SelectList(await reviews.AsNoTracking().ToListAsync());
+            movieGenreVM.movies = await movies.ToListAsync();
+
+            var movieReviewVM = new ReviewList();
+            //movieReviewVM.movie = movie;
+            movieReviewVM.mReview = new SelectList(await reviews.AsNoTracking().ToListAsync());
+            movieReviewVM.review = await reviews.ToListAsync();
+
+            var movieReviewModelVM = new MovieReview();
+            movieReviewModelVM.MGenre = movieGenreVM;
+            movieReviewModelVM.MReview = movieReviewVM;
+
+            return View(movieReviewModelVM);
+
+            //return View(await reviews.AsNoTracking().ToListAsync());
+        }
 
         // GET: Reviews/Details/5
         public async Task<IActionResult> Details(int? id)

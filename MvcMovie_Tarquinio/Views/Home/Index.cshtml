@@ -1,8 +1,20 @@
-﻿@{
+﻿@model MvcMovie_Tarquinio.Models.MovieReview
+
+@{
     ViewData["Title"] = "Home Page";
 }
+<p>
+    <div class="container body-content">
+        <span class="big">
+            <h1><a class="btn btn-lg btn-warning btn-block" asp-controller="Movies" asp-action="Index">Let's Go to the Movies</a></h1>
+        </span>
+        <span class="big">
+            <h1><a class="btn btn-lg btn-primary btn-block" asp-controller="Reviews" asp-action="Index">Read the Reviews</a></h1>
+        </span>
+    </div>
+</p>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+@*<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -103,4 +115,4 @@
             <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
         </ul>
     </div>
-</div>
+</div>*@

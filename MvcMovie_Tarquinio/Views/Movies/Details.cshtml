@@ -5,10 +5,10 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>Movie Details</h2>
 
 <div>
-    <h4>Movie</h4>
+    <h4>"@Model.movie.Title"</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -61,8 +61,8 @@
                         <hr />
                     </td>
                     <td>
-                        <a class="btn btn-xs btn-default" asp-controller="Reviews" asp-action="Edit" asp-route-id="@review.ID">Edit</a>
-                        <a class="btn btn-xs btn-default" asp-controller="Reviews" asp-action="Delete" asp-route-id="@review.ID">Delete</a>
+                        <a class="btn btn-xs btn-default" asp-controller="Reviews" asp-action="Edit" asp-route-id="@review.ID">Edit Review</a>
+                        <a class="btn btn-xs btn-default" asp-controller="Reviews" asp-action="Delete" asp-route-id="@review.ID">Delete Review</a>
                     </td>
                     @{
                         review.MovieID = (int)ViewData["mID"];
@@ -78,6 +78,6 @@
 </div>
 </br>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.movie.ID" class="btn btn-sm btn-default">Edit</a> |
-    <a asp-action="Index" class="btn btn-sm btn-default">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.movie.ID" class="btn btn-sm btn-default">Edit Movie</a> |
+    <a asp-action="Index" class="btn btn-sm btn-default">Back to Movie List</a>
 </div>
